@@ -156,7 +156,9 @@ void VariableDeclare(): { }
 
 void Expression(): { }
 {
-	Identifier()< EQUAL > ((< PLUS >|< MINUS >) Identifier() (< PLUS >|< MINUS >) Identifier())+
+	Identifier()< EQUAL >
+	((Identifier() (< PLUS >|< MINUS >) Identifier())
+| (( < PLUS > |< MINUS > ) (Identifier() (< PLUS >|< MINUS >) Identifier()))*)
 }
 
 void Identifier(): { }
