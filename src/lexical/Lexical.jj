@@ -16,7 +16,7 @@ public class Lexical
   public static void main(String args []) throws ParseException,FileNotFoundException
   {
 	//Lexical parser = new Lexical(System.in);
-	File file = new File(".\\p\\p.txt");
+	File file = new File(".\\programme\\programme.txt");
 	FileInputStream in = new FileInputStream(file);
 	SimpleCharStream scstream=new SimpleCharStream(in);
 	LexicalTokenManager tm= new LexicalTokenManager(scstream);

@@ -7,7 +7,7 @@ public class Lexical implements LexicalConstants {
   public static void main(String args []) throws ParseException,FileNotFoundException
   {
         //Lexical parser = new Lexical(System.in);
-        File file = new File(".\u005c\u005cp\u005c\u005cp.txt");
+        File file = new File(".\u005c\u005cprogramme\u005c\u005cprogramme.txt");
         FileInputStream in = new FileInputStream(file);
         SimpleCharStream scstream=new SimpleCharStream(in);
         LexicalTokenManager tm= new LexicalTokenManager(scstream);
