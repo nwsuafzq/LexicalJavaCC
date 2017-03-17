@@ -8,24 +8,35 @@ options
 
 PARSER_BEGIN(Lexical)
 package lexical;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 public class Lexical
 {
-  public static void main(String args []) throws ParseException
+  public static void main(String args []) throws ParseException,FileNotFoundException
   {
+	//Lexical parser = new Lexical(System.in);
+	File file = new File(".\\p\\p.txt");
+	FileInputStream in = new FileInputStream(file);
+	SimpleCharStream scstream=new SimpleCharStream(in);
+	LexicalTokenManager tm= new LexicalTokenManager(scstream);
+	Lexical parser = new Lexical(tm);
+	Boolean bool=true;
+
     
-    Lexical parser = new Lexical(System.in);
-   	  
-    while (true)
-    {
-//      System.out.println("Reading from standard input...");
-//      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
+//    while (true)
+	if(bool)    
+   		{
+      //      System.out.println("Reading from standard input...");
+      //      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
+      
       try
       {
         switch (Lexical.one_line())
         {
           case 0 : 
           System.out.println("OK.");
+          bool=false;
           break;
           case 1 : 
           System.out.println("Goodbye.");
@@ -44,9 +55,12 @@ public class Lexical
       {
         System.out.println("Oops.");
         System.out.println(e.getMessage());
-        break;
+        //break;
       }
     }
+
+
+
   }
 }
 
@@ -76,7 +90,7 @@ TOKEN :	 // KEYWORD
 | < RETURN : "return" >
 | < VOID : "void" >
 | < WHILE : "while" >
-| < MAIN :"main" >
+| < MAIN : "main" >
 }
 
 TOKEN : /* 定义标识符 */
@@ -113,31 +127,19 @@ TOKEN :
 | < #DIGIT : [ "0"-"9" ] >
 }
 
-TOKEN :
+TOKEN :  // 定义 大 中 括号
 {
-//  < LC : "(" >
-//| < RC : ")" >
- < LB : "{" >
+  < LB : "{" >
 | < RB : "}" >
-  //| <RM:"]">   
-  //| <LB:"{">   
-  //| <RB:"}"> 
+| < LM : "[" >
+| < RM : "]" >
 }
 
-//TOKEN:
-//{
-// < LC:"(" >  
-//| <RC:")">   
-//| <LM:"[">   
-//| <RM:"]">   
-//| <LB:"{">   
-//| <RB:"}"> 
-//
-//} 
+
 int one_line() :
 {}
 {
-  Procedure() "<EOF>"
+  Procedure() < EOF >
   {
     return 0;
   }
@@ -147,33 +149,68 @@ int one_line() :
   }
 }
 
-void VariableDeclare(): { }
+void VariableDeclare() :
+{}
 {
-	(< INT > Identifier()(< COMMA >Identifier())*< SEMICOLON >)
-	
-	
+  (
+    < INT > Identifier()
+    (
+      < COMMA > Identifier()
+    )*
+    < SEMICOLON >
+  )
 }
 
-void Expression(): { }
+void Expression() :
+{}
 {
-	Identifier()< EQUAL >
-	((Identifier() (< PLUS >|< MINUS >) Identifier())
-| (( < PLUS > |< MINUS > ) (Identifier() (< PLUS >|< MINUS >) Identifier()))*)
+  Identifier() < EQUAL >
+  (
+    (
+      Identifier()
+      (
+        < PLUS >
+      | < MINUS >
+      )
+      Identifier()
+    )
+  |
+    (
+      (
+        < PLUS >
+      | < MINUS >
+      )
+      (
+        Identifier()
+        (
+          < PLUS >
+        | < MINUS >
+        )
+        Identifier()
+      )
+    )*
+  )
+  < SEMICOLON >
 }
 
-void Identifier(): { }
+void Identifier() :
+{}
 {
-	< IDENTIFIER >
-}
-void Procedure(): { }
-{
-  < VOID ><MAIN><LEFTPARENTHESES><RIGHTPARENTHESES><LB>
-  (VariableDeclare())*
-	(Expression())*
-	
-  <RB>
+  < IDENTIFIER >
 }
 
+void Procedure() :
+{}
+{
+  < VOID > < MAIN > < LEFTPARENTHESES > < RIGHTPARENTHESES > < LB >
+  (
+    VariableDeclare()
+  )*
+  (
+    Expression()
+  )*
+  < RB >
+}
 
 void sum() :
 {}
@@ -212,5 +249,5 @@ void element() :
 {}
 {
   < CONSTANT >
-| "("sum()")"
+| "(" sum() ")"
 }

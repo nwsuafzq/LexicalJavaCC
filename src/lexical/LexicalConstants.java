@@ -58,6 +58,10 @@ public interface LexicalConstants {
   int LB = 27;
   /** RegularExpression Id. */
   int RB = 28;
+  /** RegularExpression Id. */
+  int LM = 29;
+  /** RegularExpression Id. */
+  int RM = 30;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -93,7 +97,8 @@ public interface LexicalConstants {
     "<DIGIT>",
     "\"{\"",
     "\"}\"",
-    "\"<EOF>\"",
+    "\"[\"",
+    "\"]\"",
   };
 
 }
