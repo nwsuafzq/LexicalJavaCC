@@ -3,55 +3,59 @@ package lexical;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
 public class Lexical implements LexicalConstants {
-  public static void main(String args []) throws ParseException,FileNotFoundException
+  public static void main(String args []) throws ParseException, FileNotFoundException
   {
-        //Lexical parser = new Lexical(System.in);
-        File file = new File(".\u005c\u005cprogramme\u005c\u005cprogramme.txt");
-        FileInputStream in = new FileInputStream(file);
-        SimpleCharStream scstream=new SimpleCharStream(in);
-        LexicalTokenManager tm= new LexicalTokenManager(scstream);
-        Lexical parser = new Lexical(tm);
-        Boolean bool=true;
+    //Lexical parser = new Lexical(System.in);
+    File file = new File(".\u005c\u005cprogramme\u005c\u005cprogramme.txt");
+    FileInputStream in = new FileInputStream(file);
+    SimpleCharStream scstream = new SimpleCharStream(in);
+    LexicalTokenManager tm = new LexicalTokenManager(scstream);
+    Lexical parser = new Lexical(tm);
+    Token token = new Token();
+    while (true)
+    {
+      token = tm.getNextToken();
 
-
-//    while (true)
-        if(bool)
-                {
-      //      System.out.println("Reading from standard input...");
-      //      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
-
-      try
-      {
-        switch (Lexical.one_line())
-        {
-          case 0 :
-          System.out.println("OK.");
-          bool=false;
-          break;
-          case 1 :
-          System.out.println("Goodbye.");
-          break;
-          default :
-          break;
-        }
-      }
-      catch (Exception e)
-      {
-        System.out.println("NOK.");
-        System.out.println(e.getMessage());
-        Lexical.ReInit(System.in);
-      }
-      catch (Error e)
-      {
-        System.out.println("Oops.");
-        System.out.println(e.getMessage());
-        //break;
-      }
+      if (token.image != "")
+        System.out.println(token.image);
+      else break;
     }
-
-
-
+    //Boolean bool=true;
+    //    while (true)
+    //if(bool)    
+    //   		{
+    //      System.out.println("Reading from standard input...");
+    //      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
+    //      try
+    //      {
+    //        switch (Lexical.one_line())
+    //        {
+    //          case 0 : 
+    //          System.out.println("OK.");
+    //          bool=false;
+    //          break;
+    //          case 1 : 
+    //          System.out.println("Goodbye.");
+    //          break;
+    //          default : 
+    //          break;
+    //        }
+    //      }
+    //      catch (Exception e)
+    //      {
+    //        System.out.println("NOK.");
+    //        System.out.println(e.getMessage());
+    //        Lexical.ReInit(System.in);
+    //      }
+    //      catch (Error e)
+    //      {
+    //        System.out.println("Oops.");
+    //        System.out.println(e.getMessage());
+    //        //break;
+    //      }
+    //    }
   }
 
   static final public int one_line() throws ParseException {
