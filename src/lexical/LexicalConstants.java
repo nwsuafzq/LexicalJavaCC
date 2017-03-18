@@ -19,49 +19,53 @@ public interface LexicalConstants {
   /** RegularExpression Id. */
   int DIVIDE = 8;
   /** RegularExpression Id. */
-  int IF = 9;
+  int DAYU = 9;
   /** RegularExpression Id. */
-  int ELSE = 10;
+  int XIAOYU = 10;
   /** RegularExpression Id. */
-  int INT = 11;
+  int IF = 11;
   /** RegularExpression Id. */
-  int RETURN = 12;
+  int ELSE = 12;
   /** RegularExpression Id. */
-  int VOID = 13;
+  int INT = 13;
   /** RegularExpression Id. */
-  int WHILE = 14;
+  int RETURN = 14;
   /** RegularExpression Id. */
-  int MAIN = 15;
+  int VOID = 15;
   /** RegularExpression Id. */
-  int IDENTIFIER = 16;
+  int WHILE = 16;
   /** RegularExpression Id. */
-  int LETTER = 17;
+  int MAIN = 17;
   /** RegularExpression Id. */
-  int UNDERSCORE = 18;
+  int IDENTIFIER = 18;
   /** RegularExpression Id. */
-  int COMMA = 19;
+  int LETTER = 19;
   /** RegularExpression Id. */
-  int SEMICOLON = 20;
+  int UNDERSCORE = 20;
   /** RegularExpression Id. */
-  int COLON = 21;
+  int COMMA = 21;
   /** RegularExpression Id. */
-  int LEFTPARENTHESES = 22;
+  int SEMICOLON = 22;
   /** RegularExpression Id. */
-  int RIGHTPARENTHESES = 23;
+  int COLON = 23;
   /** RegularExpression Id. */
-  int EQUAL = 24;
+  int LEFTPARENTHESES = 24;
   /** RegularExpression Id. */
-  int CONSTANT = 25;
+  int RIGHTPARENTHESES = 25;
   /** RegularExpression Id. */
-  int DIGIT = 26;
+  int EQUAL = 26;
   /** RegularExpression Id. */
-  int LB = 27;
+  int CONSTANT = 27;
   /** RegularExpression Id. */
-  int RB = 28;
+  int DIGIT = 28;
   /** RegularExpression Id. */
-  int LM = 29;
+  int LB = 29;
   /** RegularExpression Id. */
-  int RM = 30;
+  int RB = 30;
+  /** RegularExpression Id. */
+  int LM = 31;
+  /** RegularExpression Id. */
+  int RM = 32;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -77,6 +81,8 @@ public interface LexicalConstants {
     "\"-\"",
     "\"*\"",
     "\"/\"",
+    "\">\"",
+    "\"< \"",
     "\"if\"",
     "\"else\"",
     "\"int\"",

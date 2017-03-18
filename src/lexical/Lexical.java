@@ -7,19 +7,20 @@ import java.io.FileNotFoundException;
 public class Lexical implements LexicalConstants {
   public static void main(String args []) throws ParseException, FileNotFoundException
   {
-    //Lexical parser = new Lexical(System.in);
-    File file = new File(".\u005c\u005cprogramme\u005c\u005cprogramme.txt");
+    File file = new File(".\u005c\u005cprogramme\u005c\u005cp2.txt");
     FileInputStream in = new FileInputStream(file);
     SimpleCharStream scstream = new SimpleCharStream(in);
     LexicalTokenManager tm = new LexicalTokenManager(scstream);
-    Lexical parser = new Lexical(tm);
+    //Lexical parser = new Lexical(tm);
     Token token = new Token();
     while (true)
     {
       token = tm.getNextToken();
-
       if (token.image != "")
-        System.out.println(token.image);
+      {
+        System.out.println(token.kind+"\u005ct"+token.image);
+        //System.out.println(token.toString());
+      }
       else break;
     }
     //Boolean bool=true;
@@ -301,11 +302,16 @@ public class Lexical implements LexicalConstants {
   static private int jj_gen;
   static final private int[] jj_la1 = new int[15];
   static private int[] jj_la1_0;
+  static private int[] jj_la1_1;
   static {
       jj_la1_init_0();
+      jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x102000,0x80000,0x60,0x60,0x60,0x60,0x10000,0x800,0x10000,0x60,0x60,0x180,0x180,0x2400040,0x2400000,};
+      jj_la1_0 = new int[] {0x408000,0x200000,0x60,0x60,0x60,0x60,0x40000,0x2000,0x40000,0x60,0x60,0x180,0x180,0x9000040,0x9000000,};
+   }
+   private static void jj_la1_init_1() {
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -443,7 +449,7 @@ public class Lexical implements LexicalConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[31];
+    boolean[] la1tokens = new boolean[33];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -454,10 +460,13 @@ public class Lexical implements LexicalConstants {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
             la1tokens[j] = true;
           }
+          if ((jj_la1_1[i] & (1<<j)) != 0) {
+            la1tokens[32+j] = true;
+          }
         }
       }
     }
-    for (int i = 0; i < 31; i++) {
+    for (int i = 0; i < 33; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

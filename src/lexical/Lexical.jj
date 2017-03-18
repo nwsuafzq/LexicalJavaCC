@@ -16,19 +16,20 @@ public class Lexical
 {
   public static void main(String args []) throws ParseException, FileNotFoundException
   {
-    //Lexical parser = new Lexical(System.in);
-    File file = new File(".\\programme\\programme.txt");
+    File file = new File(".\\programme\\p2.txt");
     FileInputStream in = new FileInputStream(file);
     SimpleCharStream scstream = new SimpleCharStream(in);
     LexicalTokenManager tm = new LexicalTokenManager(scstream);
-    Lexical parser = new Lexical(tm);
+    //Lexical parser = new Lexical(tm);
     Token token = new Token();
     while (true)
     {
       token = tm.getNextToken();
-      
       if (token.image != "")
-      	System.out.println(token.image);
+      {
+        System.out.println(token.kind+"\t"+token.image);
+        //System.out.println(token.toString());
+      }
       else break;
     }
     //Boolean bool=true;
@@ -84,6 +85,8 @@ TOKEN : /* OPERATORS */
 | < MINUS : "-" >
 | < MULTIPLY : "*" >
 | < DIVIDE : "/" >
+| < DAYU : ">" >
+| < XIAOYU : "< " >
 }
 
 TOKEN :	 // KEYWORD
